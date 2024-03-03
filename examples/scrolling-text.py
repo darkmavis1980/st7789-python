@@ -76,6 +76,7 @@ disp.begin()
 WIDTH = disp.width
 HEIGHT = disp.height
 
+print(WIDTH, HEIGHT)
 
 img = Image.new('RGB', (WIDTH, HEIGHT), color=(0, 0, 0))
 
@@ -83,7 +84,14 @@ draw = ImageDraw.Draw(img)
 
 font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
 
-size_x, size_y = draw.textsize(MESSAGE, font)
+f_left, f_top, f_right, f_bottom = font.getbbox(MESSAGE)
+
+size_x = f_right - f_left
+size_y = f_bottom - f_top
+
+#size_x = draw.textlength(MESSAGE, font)
+
+print(size_x, size_y)
 
 text_x = disp.width
 text_y = (disp.height - size_y) // 2
